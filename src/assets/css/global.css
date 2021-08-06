@@ -1,0 +1,88 @@
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  min-width: 1366px;
+}
+
+@font-face {
+  font-family: electronicFont;
+  src: url(../fonts/DS-DIGIT.TTF);
+}
+
+.el-card {
+  margin-bottom: 50px;
+}
+
+li {
+  list-style: none;
+}
+
+#app {
+  overflow: hidden;
+}
+
+.el-breadcrumb {
+  margin-bottom: 15px;
+  font-size: 12px;
+}
+
+.el-card {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15) !important;
+}
+
+.el-table {
+  margin-top: 15px;
+  font-size: 12px;
+}
+
+.el-pagination {
+  margin-top: 18px;
+}
+
+.el-steps {
+  margin: 20px 0;
+  justify-content: center
+}
+
+.el-step__title {
+  font-size: 14px;
+}
+
+.ql-editor {
+  min-height: 300px;
+}
+
+html, body, #app {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.com-page {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.com-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.com-chart {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+canvas {
+  border-radius: 20px;
+}
+
+.com-container {
+  position: relative;
+}
