@@ -43,7 +43,7 @@ export default {
   },
   created() {
     this.axiosInstance = axios.create({
-      baseURL: 'http://119.23.53.122',
+      baseURL: 'http://127.0.0.1:8080',
     })
     this.$socket.registerCallBack('mapData', this.getData)
   },

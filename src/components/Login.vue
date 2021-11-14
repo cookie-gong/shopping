@@ -95,6 +95,9 @@ export default {
   height: 300px;
   width: 450px;
   background-color: #fff;
+  opacity: .9;
+  pointer-events: none;
+  border-radius: 10px;
 }
 .img_circle {
   width: 130px;
@@ -119,6 +122,7 @@ img {
   width: 100%;
   padding: 0 20px;
   box-sizing: border-box;
+  pointer-events: auto;
 }
 .el-form-item {
   margin-bottom: 20px;

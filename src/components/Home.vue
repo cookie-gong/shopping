@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header>
-      <div>
+      <div @click="goHome" class="logo">
         <img src="../assets/pic.png" alt="后台logo" />
         <span>电商后台管理系统</span>
         <span>{{ version }}</span>
@@ -67,13 +67,13 @@ export default {
         103: 'iconfont icon-tijikongjian',
         101: 'iconfont icon-shangpin',
         102: 'iconfont icon-danju',
-        145: 'iconfont icon-baobiao',
+        145: 'iconfont icon-baobiao'
       },
       // 菜单栏是否开启水平折叠
       isCollapse: false,
       activePath: '',
       rootName: '',
-      version: 'Version: 1.0.0',
+      version: 'Version: 1.0.0'
     }
   },
   created() {
@@ -81,6 +81,9 @@ export default {
     this.activePath = window.sessionStorage.getItem('activePath')
   },
   methods: {
+    goHome() {
+      this.$router.push('/home')
+    },
     logout() {
       //清除本地缓存
       window.sessionStorage.clear()
@@ -105,22 +108,25 @@ export default {
       if (!screenfull.isEnabled) {
         this.$message({
           message: 'you browser can not work',
-          type: 'warning',
+          type: 'warning'
         })
         return false
       }
       screenfull.toggle()
     },
-    togitee(){
-      window.open("https://gitee.com/cookieg/vue2_eletricity",'top'); 
+    togitee() {
+      window.open('https://gitee.com/cookieg/vue2_eletricity', 'top')
     },
-    togithub(){
-      window.open("https://github.com/cookie-gong/bootstrap",'top'); 
+    togithub() {
+      window.open('https://github.com/cookie-gong/bootstrap', 'top')
     }
-  },
+  }
 }
 </script>
 <style lang="css" scoped>
+.logo {
+  cursor: pointer;
+}
 .el-container {
   height: 100%;
 }
