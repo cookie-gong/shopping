@@ -1,17 +1,9 @@
 <template>
   <el-container>
     <el-header>
-      <div @click="goHome" class="logo">
-        <img src="../assets/pic.png" alt="后台logo" />
+      <div class="logo">
+        <img src="../assets/demo.gif" alt="gif图片" @contextmenu.prevent />
         <span>电商后台管理系统</span>
-        <span>{{ version }}</span>
-      </div>
-      <div class="back">
-        <img src="../assets/demo.gif" alt="gif图片" />
-      </div>
-      <div>
-        <span>欢迎您：{{ rootName }}</span>
-        <i class="el-icon-full-screen" @click="click"></i>
       </div>
     </el-header>
     <el-container>
@@ -50,6 +42,7 @@
             :position="position"
             :isOpenNewTab="isOpenNewTab"
             @process="print"
+            v-if="$route.path.includes('/welcome')"
           ></quick-menu>
           <router-view></router-view>
         </el-main>
@@ -78,7 +71,6 @@ export default {
       isCollapse: false,
       activePath: '',
       rootName: '',
-      version: 'Version: 1.0.0',
       count: 4,
       icons: ['fa fa-github', 'fa fa-github-alt', 'fa fa-share-alt', 'fa fa-home'],
       list: [
@@ -97,18 +89,18 @@ export default {
     this.getMenu()
     this.activePath = window.sessionStorage.getItem('activePath')
   },
+  mounted() {
+    this.openVn()
+  },
   methods: {
     print(key) {
       if (key === 0) {
-        window.open('https://github.com/cookie-gong/bootstrap', '_blank')
+        window.open('https://github.com/cookie-gong', '_blank')
       } else if (key === 1) {
-        window.open('https://gitee.com/cookieg/vue2_eletricity', '_blank')
+        window.open('https://gitee.com/cookieg', '_blank')
       } else if (key === 2) {
         window.open('https://gongweiwei.top', '_blank')
       }
-    },
-    goHome() {
-      this.$router.push('/home')
     },
     async getMenu() {
       const { data: res } = await this.$http.get('menus')
@@ -134,6 +126,15 @@ export default {
         return false
       }
       screenfull.toggle()
+    },
+    openVn() {
+      const h = this.$createElement
+      this.$message({
+        message: h('p', null, [h('span', null, '欢迎您：'), h('i', { style: 'color: teal' }, window.sessionStorage.getItem('rootName'))]),
+        center: true,
+        type: 'success',
+        duration: 2000,
+      })
     }
   },
   components: {
@@ -143,7 +144,11 @@ export default {
 </script>
 <style lang="css" scoped>
 .logo {
-  cursor: pointer;
+  cursor: auto;
+}
+
+.logo img {
+  cursor: auto;
 }
 .el-container {
   height: 100%;
