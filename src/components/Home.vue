@@ -12,14 +12,6 @@
       <div>
         <span>欢迎您：{{ rootName }}</span>
         <i class="el-icon-full-screen" @click="click"></i>
-        <el-dropdown>
-          <span class="el-dropdown-link"> 下拉菜单<i class="el-icon-arrow-down el-icon--right"></i> </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-plus" @click.native="togitee">gitee</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-circle-plus" @click.native="togithub">github</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-circle-plus-outline" @click.native="logout">退出</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
       </div>
     </el-header>
     <el-container>
@@ -49,6 +41,16 @@
       </el-aside>
       <el-container>
         <el-main>
+          <quick-menu
+            :menu-count="count"
+            :icon-class="icons"
+            :menu-url-list="list"
+            :background-color="backgroundColor"
+            :color="color"
+            :position="position"
+            :isOpenNewTab="isOpenNewTab"
+            @process="print"
+          ></quick-menu>
           <router-view></router-view>
         </el-main>
       </el-container>
@@ -56,7 +58,10 @@
   </el-container>
 </template>
 <script>
+import Vue from 'vue'
 import screenfull from 'screenfull'
+import quickMenu from 'vue-quick-menu'
+import 'font-awesome/css/font-awesome.min.css'
 export default {
   data() {
     return {
@@ -73,7 +78,19 @@ export default {
       isCollapse: false,
       activePath: '',
       rootName: '',
-      version: 'Version: 1.0.0'
+      version: 'Version: 1.0.0',
+      count: 4,
+      icons: ['fa fa-github', 'fa fa-github-alt', 'fa fa-share-alt', 'fa fa-home'],
+      list: [
+        { isLink: false, url: '/study' },
+        { isLink: false, url: '/study' },
+        { isLink: false, url: '/study' },
+        { isLink: true, url: '/login' }
+      ],
+      backgroundColor: '#42A5F5',
+      color: '#eee',
+      position: 'bottom-right',
+      isOpenNewTab: false
     }
   },
   created() {
@@ -81,13 +98,17 @@ export default {
     this.activePath = window.sessionStorage.getItem('activePath')
   },
   methods: {
+    print(key) {
+      if (key === 0) {
+        window.open('https://github.com/cookie-gong/bootstrap', '_blank')
+      } else if (key === 1) {
+        window.open('https://gitee.com/cookieg/vue2_eletricity', '_blank')
+      } else if (key === 2) {
+        window.open('https://gongweiwei.top', '_blank')
+      }
+    },
     goHome() {
       this.$router.push('/home')
-    },
-    logout() {
-      //清除本地缓存
-      window.sessionStorage.clear()
-      this.$router.push('/login')
     },
     async getMenu() {
       const { data: res } = await this.$http.get('menus')
@@ -113,13 +134,10 @@ export default {
         return false
       }
       screenfull.toggle()
-    },
-    togitee() {
-      window.open('https://gitee.com/cookieg/vue2_eletricity', 'top')
-    },
-    togithub() {
-      window.open('https://github.com/cookie-gong/bootstrap', 'top')
     }
+  },
+  components: {
+    quickMenu
   }
 }
 </script>
@@ -184,11 +202,5 @@ export default {
 
 .back img {
   height: 80px;
-}
-
-.el-dropdown-link {
-  cursor: pointer;
-  font-size: 20px;
-  color: #ffffff;
 }
 </style>
