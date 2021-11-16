@@ -43,6 +43,7 @@
             :isOpenNewTab="isOpenNewTab"
             @process="print"
             v-if="$route.path.includes('/welcome')"
+            class="menu-bottom"
           ></quick-menu>
           <router-view></router-view>
         </el-main>
@@ -207,5 +208,8 @@ export default {
 
 .back img {
   height: 80px;
+}
+.menu-bottom {
+  z-index: 100;
 }
 </style>
