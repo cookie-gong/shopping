@@ -25,7 +25,6 @@ import ScreenPage from '../components/report/ScreenPage.vue' */
 const Login = () => import(/* webpackChunkName: "login_Home_Welcome" */ "../components/Login.vue")
 const Home = () => import(/* webpackChunkName: "login_Home_Welcome" */ "../components/Home.vue")
 const Welcome = () => import(/* webpackChunkName: "login_Home_Welcome" */ "../components/Welcome.vue")
-const Study = () => import(/* webpackChunkName: "login_Home_Welcome" */ "../components/Study.vue")
 
 // 用户管理
 const Users = () => import(/* webpackChunkName: "users" */ "../components/users/Users.vue")
@@ -52,7 +51,6 @@ const router = new VueRouter({
   routes: [
     { path: '/', redirect: '/login' },
     { path: '/login', component: Login },
-    { path: '/study', component: Study },
     {
       path: '/home',
       component: Home,

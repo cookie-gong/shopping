@@ -6,7 +6,7 @@
 <script>
 export default {}
 </script>
-<style lang="css" scoped>
+<style lang="less" scoped>
 #app {
   width: 100%;
   height: 100%;

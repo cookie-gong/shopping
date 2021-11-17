@@ -24,6 +24,7 @@ export default {
       mapData: {},
       // 判断是否进入省份
       isProvince: false,
+      url:''
     }
   },
   computed: {
@@ -42,8 +43,10 @@ export default {
     },
   },
   created() {
+    this.url = location.protocol + "//" + location.host
+    console.log(this.url)
     this.axiosInstance = axios.create({
-      baseURL: 'http://127.0.0.1:8080',
+      baseURL: this.url,
     })
     this.$socket.registerCallBack('mapData', this.getData)
   },

@@ -74,12 +74,7 @@ export default {
       rootName: '',
       count: 4,
       icons: ['fa fa-github', 'fa fa-github-alt', 'fa fa-share-alt', 'fa fa-home'],
-      list: [
-        { isLink: false, url: '/study' },
-        { isLink: false, url: '/study' },
-        { isLink: false, url: '/study' },
-        { isLink: true, url: '/login' }
-      ],
+      list: [{ isLink: false }, { isLink: false }, { isLink: false }, { isLink: true, url: '/login' }],
       backgroundColor: '#42A5F5',
       color: '#eee',
       position: 'bottom-right',
@@ -134,7 +129,7 @@ export default {
         message: h('p', null, [h('span', null, '欢迎您：'), h('i', { style: 'color: teal' }, window.sessionStorage.getItem('rootName'))]),
         center: true,
         type: 'success',
-        duration: 2000,
+        duration: 2000
       })
     }
   },
@@ -143,14 +138,15 @@ export default {
   }
 }
 </script>
-<style lang="css" scoped>
+<style lang="less" scoped>
 .logo {
   cursor: auto;
+
+  img {
+    cursor: auto;
+  }
 }
 
-.logo img {
-  cursor: auto;
-}
 .el-container {
   height: 100%;
 }

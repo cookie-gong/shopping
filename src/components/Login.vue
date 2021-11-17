@@ -25,14 +25,14 @@
   </div>
 </template>
 <script>
-const three = ()=>import("./three/three.vue");
+const three = () => import('./three/three.vue')
 
 export default {
   data() {
     return {
       form: {
         username: 'admin',
-        password: '123456',
+        password: '123456'
       },
       rules: {
         username: [
@@ -41,8 +41,8 @@ export default {
             min: 3,
             max: 10,
             message: '长度在 3 到 10 个字符',
-            trigger: 'blur',
-          },
+            trigger: 'blur'
+          }
         ],
         password: [
           { required: true, message: '请输入用户密码', trigger: 'blur' },
@@ -50,10 +50,10 @@ export default {
             min: 6,
             max: 16,
             message: '长度在 6 到 16 个字符',
-            trigger: 'blur',
-          },
-        ],
-      },
+            trigger: 'blur'
+          }
+        ]
+      }
     }
   },
   methods: {
@@ -61,7 +61,7 @@ export default {
       this.$refs.formRef.resetFields()
     },
     login() {
-      this.$refs.formRef.validate(async (valid) => {
+      this.$refs.formRef.validate(async valid => {
         if (!valid) return
         const { data: res } = await this.$http.post('login', this.form)
         if (res.meta.status !== 200) {
@@ -72,69 +72,72 @@ export default {
         window.sessionStorage.setItem('rootName', this.form.username)
         this.$router.push('/home')
       })
-    },
+    }
   },
   components: {
     three
-  },
+  }
 }
 </script>
-<style lang="css" scoped>
+<style lang="less" scoped>
 .login_container {
   position: absolute;
   width: 100%;
   height: 100%;
   background-color: #333;
   overflow: hidden;
-}
-.login_box {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  height: 300px;
-  width: 450px;
-  background-color: #fff;
-  opacity: .9;
-  pointer-events: none;
-  border-radius: 10px;
-}
-.img_circle {
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  border: 1px solid #eee;
-  padding: 10px;
-  box-shadow: 0 0 10px #ddd;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: #eee;
-}
-.login_form {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 0 20px;
-  box-sizing: border-box;
-  pointer-events: auto;
-}
-.el-form-item {
-  margin-bottom: 20px;
-}
-.btns {
-  display: flex;
-  justify-content: flex-end;
-}
 
-.three{
-  position: absolute;
-  height: 100%;
-  width: 100%;
+  .login_box {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 300px;
+    width: 450px;
+    background-color: #fff;
+    opacity: 0.9;
+    pointer-events: none;
+    border-radius: 10px;
+
+    .img_circle {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 1px solid #eee;
+      padding: 10px;
+      box-shadow: 0 0 10px #ddd;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: #eee;
+      }
+    }
+
+    .login_form {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 0 20px;
+      box-sizing: border-box;
+      pointer-events: auto;
+      .el-form-item {
+        margin-bottom: 20px;
+      }
+      .btns {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  .three {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
 }
 </style>

@@ -91,10 +91,10 @@ export default {
         stock: false,
         map: false,
         rank: false,
-        hot: false,
+        hot: false
       },
       timeNow: '',
-      timer: null,
+      timer: null
     }
   },
   created() {
@@ -124,7 +124,7 @@ export default {
         action: 'fullScreen',
         socketType: 'fullScreen',
         chartName: chartName,
-        value: tragetValue,
+        value: tragetValue
       })
     },
     // 接收到全屏数据之后的处理
@@ -145,7 +145,7 @@ export default {
         action: 'themeChange',
         socketType: 'themeChange',
         chartName: '',
-        value: '',
+        value: ''
       })
     },
     // 接收服务器传入的主题数据，实现主题切换
@@ -166,7 +166,7 @@ export default {
       if (!screenfull.isEnabled) {
         this.$message({
           message: 'you browser can not work',
-          type: 'warning',
+          type: 'warning'
         })
         return false
       }
@@ -175,7 +175,7 @@ export default {
     backPage() {
       this.$router.go(-1)
       window.sessionStorage.setItem('activePath', '')
-    },
+    }
   },
   components: {
     Hot,
@@ -183,7 +183,7 @@ export default {
     Rank,
     Seller,
     Stock,
-    Trend,
+    Trend
   },
   computed: {
     ...mapState(['theme']),
@@ -196,13 +196,13 @@ export default {
     containerStyle() {
       return {
         backgroundColor: getThemeValue(this.theme).backgroundColor,
-        color: getThemeValue(this.theme).titleColor,
+        color: getThemeValue(this.theme).titleColor
       }
-    },
-  },
+    }
+  }
 }
 </script>
-<style lang="css" scoped>
+<style lang="less" scoped>
 .fullscreen {
   position: fixed !important;
   top: 0 !important;
@@ -220,63 +220,64 @@ export default {
   background-color: #161522;
   color: #fff;
   box-sizing: border-box;
-}
-.screen-header {
-  width: 100%;
-  height: 64px;
-  font-size: 20px;
-  position: relative;
+
+  .screen-header {
+    width: 100%;
+    height: 64px;
+    font-size: 20px;
+    position: relative;
+
+    .title {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      font-size: 20px;
+      transform: translate(-50%, -50%);
+    }
+    .title-right {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      right: 0px;
+      top: 50%;
+      transform: translateY(-80%);
+
+      .logo {
+        position: absolute;
+        left: 0px;
+        top: 50%;
+        transform: translateY(-80%);
+        cursor: pointer;
+
+        span {
+          margin-right: 10px;
+        }
+
+        .el-icon-s-home {
+          font-size: 25px;
+        }
+      }
+      .qiehuan {
+        width: 28px;
+        height: 21px;
+        cursor: pointer;
+      }
+
+      .el-icon-full-screen {
+        font-size: 25px;
+        margin-left: 10px;
+      }
+
+      .datetime {
+        font-size: 15px;
+        margin-left: 10px;
+      }
+    }
+  }
 }
 
 .screen-header > div img {
   width: 100%;
-}
-
-.screen-header .title {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  font-size: 20px;
-  transform: translate(-50%, -50%);
-}
-.screen-header .title-right {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  right: 0px;
-  top: 50%;
-  transform: translateY(-80%);
-}
-
-.screen-header .qiehuan {
-  width: 28px;
-  height: 21px;
-  cursor: pointer;
-}
-.screen-header .el-icon-full-screen {
-  font-size: 25px;
-  margin-left: 10px;
-}
-
-.screen-header .datetime {
-  font-size: 15px;
-  margin-left: 10px;
-}
-
-.screen-header .logo {
-  position: absolute;
-  left: 0px;
-  top: 50%;
-  transform: translateY(-80%);
-  cursor: pointer;
-}
-
-.screen-header .logo span {
-  margin-right: 10px;
-}
-
-.screen-header .logo .el-icon-s-home {
-  font-size: 25px;
 }
 
 .screen-body {
@@ -284,54 +285,52 @@ export default {
   height: 100%;
   display: flex;
   margin-top: 10px;
-}
-.screen-left {
-  height: 100%;
-  width: 27.6%;
+  .screen-left {
+    height: 100%;
+    width: 27.6%;
+    #left-top {
+      height: 53%;
+      position: relative;
+    }
+    #left-bottom {
+      height: 31%;
+      margin-top: 25px;
+      position: relative;
+    }
+  }
+  .screen-middle {
+    height: 100%;
+    width: 41.5%;
+    margin-left: 1.6%;
+    margin-right: 1.6%;
+    #middle-top {
+      width: 100%;
+      height: 56%;
+      position: relative;
+    }
+    #middle-bottom {
+      margin-top: 25px;
+      width: 100%;
+      height: 28%;
+      position: relative;
+    }
+  }
+  .screen-right {
+    height: 100%;
+    width: 27.6%;
+
+    #right-top {
+      height: 46%;
+      position: relative;
+    }
+    #right-bottom {
+      height: 38%;
+      margin-top: 25px;
+      position: relative;
+    }
+  }
 }
 
-.screen-middle {
-  height: 100%;
-  width: 41.5%;
-  margin-left: 1.6%;
-  margin-right: 1.6%;
-}
-.screen-right {
-  height: 100%;
-  width: 27.6%;
-}
-
-#left-top {
-  height: 53%;
-  position: relative;
-}
-#left-bottom {
-  height: 31%;
-  margin-top: 25px;
-  position: relative;
-}
-
-#middle-top {
-  width: 100%;
-  height: 56%;
-  position: relative;
-}
-#middle-bottom {
-  margin-top: 25px;
-  width: 100%;
-  height: 28%;
-  position: relative;
-}
-
-#right-top {
-  height: 46%;
-  position: relative;
-}
-#right-bottom {
-  height: 38%;
-  margin-top: 25px;
-  position: relative;
-}
 .resize {
   position: absolute;
   right: 20px;

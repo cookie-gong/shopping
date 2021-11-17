@@ -13,6 +13,7 @@
     "element-ui": "^2.4.5",
     "font-awesome": "^4.7.0",
     "nprogress": "^0.2.0",
+    "style-resources-loader": "^1.4.1",
     "three": "^0.131.3",
     "vue": "^2.6.11",
     "vue-quick-menu": "^1.0.7",
