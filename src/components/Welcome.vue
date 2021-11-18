@@ -135,6 +135,14 @@ export default {
   components: {
     GridLayout: VueGridLayout.GridLayout,
     GridItem: VueGridLayout.GridItem
+  },
+  beforeDestroy() {
+    this.$socket.send({
+      action: 'setData',
+      socketType: 'gridData',
+      chartName: 'grid',
+      value: this.layout
+    })
   }
 }
 </script>

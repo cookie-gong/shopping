@@ -234,6 +234,22 @@ export default {
       font-size: 20px;
       transform: translate(-50%, -50%);
     }
+
+    .logo {
+      position: absolute;
+      left: 0px;
+      top: 50%;
+      transform: translateY(-80%);
+      cursor: pointer;
+
+      span {
+        margin-right: 10px;
+      }
+
+      .el-icon-s-home {
+        font-size: 25px;
+      }
+    }
     .title-right {
       display: flex;
       align-items: center;
@@ -242,21 +258,6 @@ export default {
       top: 50%;
       transform: translateY(-80%);
 
-      .logo {
-        position: absolute;
-        left: 0px;
-        top: 50%;
-        transform: translateY(-80%);
-        cursor: pointer;
-
-        span {
-          margin-right: 10px;
-        }
-
-        .el-icon-s-home {
-          font-size: 25px;
-        }
-      }
       .qiehuan {
         width: 28px;
         height: 21px;
