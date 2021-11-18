@@ -79,7 +79,7 @@
                 :h="item.h"
                 :i="item.i"
                 :style="{ backgroundColor: item.bgc, color: '#fff', 'text-align': 'center', 'line-height': `${item.h * 20}px` }"
-                @click.native="toLink"
+                @dblclick.native.self="toLink(item.url)"
               >
                 {{ item.name }}
               </grid-item>
@@ -95,6 +95,14 @@ import * as echarts from 'echarts'
 import Vue from 'vue'
 Vue.prototype.$echarts = echarts
 import VueGridLayout from 'vue-grid-layout'
+const delay = (function() {
+  let timer = 0
+  return function(callback, ms) {
+    clearTimeout(timer)
+    timer = setTimeout(callback, ms)
+  }
+})()
+
 export default {
   data() {
     return {
@@ -113,6 +121,15 @@ export default {
       value: ''
     })
   },
+  watch: {
+    layout: {
+      handler(val) {
+        this.fn()
+      },
+      // 这里是关键，代表递归监听 demo 的变化
+      deep: true
+    }
+  },
   methods: {
     echartFun() {
       var myChart = echarts.init(document.querySelector('#chart'))
@@ -130,19 +147,32 @@ export default {
       this.isShow = true
       this.bgcStyle()
     },
-    toLink() {}
+    toLink(url) {
+      if (url) {
+        window.open(url, '_blank')
+      }
+    },
+    setData() {
+      this.$socket.send({
+        action: 'setData',
+        socketType: 'gridData',
+        chartName: 'grid',
+        value: this.layout
+      })
+    },
+    // 使用防抖函数
+    fn() {
+      delay(() => {
+        this.setData()
+      }, 500)
+    }
   },
   components: {
     GridLayout: VueGridLayout.GridLayout,
     GridItem: VueGridLayout.GridItem
   },
   beforeDestroy() {
-    this.$socket.send({
-      action: 'setData',
-      socketType: 'gridData',
-      chartName: 'grid',
-      value: this.layout
-    })
+    this.setData()
   }
 }
 </script>
@@ -197,7 +227,7 @@ export default {
   font-size: 18px;
 }
 
-.vue-grid-item{
+.vue-grid-item {
   border-radius: 10px;
 }
 </style>
