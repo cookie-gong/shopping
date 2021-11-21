@@ -32,6 +32,9 @@ module.exports = {
     });
     // 开发模式
     config.when(process.env.NODE_ENV === "development", (config) => {
+      // config
+      //   .plugin("webpack-bundle-analyzer")
+      //   .use(require("webpack-bundle-analyzer").BundleAnalyzerPlugin);
       config
         .entry("app")
         .clear()
@@ -44,6 +47,14 @@ module.exports = {
   },
   publicPath: "./",
   pluginOptions: {
+    "style-resources-loader": {
+      preProcessor: "less",
+      patterns: [
+        //这个是加上自己的路径，
+        //注意：试过不能使用别名路径
+        path.resolve(__dirname, "./src/assets/css/base.less"),
+      ],
+    },
     "style-resources-loader": {
       preProcessor: "less",
       patterns: [

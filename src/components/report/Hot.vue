@@ -28,7 +28,7 @@ export default {
     this.$socket.send({
       action: 'getData',
       socketType: 'hotData',
-      chartName: 'hotProduct',
+      chartName: 'hotproduct',
       value: '',
     })
     // this.getData();

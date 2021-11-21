@@ -1,58 +1,8 @@
 <template>
   <div id="welcome">
-    <el-row :gutter="20">
-      <el-col :lg="6" :md="8" :sm="12" :xs="24">
-        <el-card>
-          <div class="content">
-            <div class="left">
-              <i class="iconfont icon-showpassword"></i>
-            </div>
-            <div class="right">
-              <div>总访问量</div>
-              <div>4025142</div>
-            </div>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :lg="6" :md="8" :sm="12" :xs="24">
-        <el-card>
-          <div class="content content2">
-            <div class="left">
-              <i class="iconfont icon-user"></i>
-            </div>
-            <div class="right">
-              <div>昨日访问量</div>
-              <div>4321</div>
-            </div>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :lg="6" :md="8" :sm="12" :xs="24">
-        <el-card>
-          <div class="content content3">
-            <div class="left">
-              <i class="iconfont icon-baobiao"></i>
-            </div>
-            <div class="right">
-              <div>总成交量</div>
-              <div>456456</div>
-            </div>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :lg="6" :md="8" :sm="12" :xs="24">
-        <el-card>
-          <div class="content">
-            <div class="left">
-              <i class="iconfont icon-3702mima"></i>
-            </div>
-            <div class="right">
-              <div>昨日成交量</div>
-              <div>121</div>
-            </div>
-          </div>
-        </el-card>
-      </el-col>
+    <el-row>
+      <el-button type="primary" round @click="addTags = true">添加标签</el-button>
+       <el-button type="danger" round @click="deleteTag">删除标签</el-button>
     </el-row>
     <template>
       <div class="box">
@@ -88,6 +38,20 @@
         </div>
       </div>
     </template>
+    <el-dialog title="添加用户" :visible.sync="addTags" width="50%" @close="addTagClosed">
+      <el-form ref="addFormRef" :model="addForm" label-width="90px" :rules="addFormRules">
+        <el-form-item label="标签名称" prop="tagname">
+          <el-input v-model="addForm.tagname"></el-input>
+        </el-form-item>
+        <el-form-item label="URL地址" prop="tagurl">
+          <el-input v-model="addForm.tagurl"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer">
+        <el-button @click="addTags = false">取 消</el-button>
+        <el-button type="primary" @click="addUser">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -105,9 +69,36 @@ const delay = (function() {
 
 export default {
   data() {
+    var checkUrl = (rules, value, callback) => {
+      const regUrl = /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/
+      if (regUrl.test(value)) {
+        return callback()
+      }
+      callback(new Error('请输入合法的URL'))
+    }
     return {
       layout: null,
-      isShow: false
+      isShow: false,
+      addTags: false,
+      addForm: {
+        tagname: '',
+        tagurl: ''
+      },
+      addFormRules: {
+        tagname: [
+          { required: true, message: '请输入标签名称', trigger: 'blur' },
+          {
+            min: 1,
+            max: 20,
+            message: '长度在 1 到 20 个字符',
+            trigger: 'blur'
+          }
+        ],
+        tagurl: [
+          { required: true, message: '请输入URL地址', trigger: 'blur' },
+          { validator: checkUrl, trigger: 'blur' }
+        ]
+      }
     }
   },
   created() {
@@ -165,6 +156,46 @@ export default {
       delay(() => {
         this.setData()
       }, 500)
+    },
+    addUser() {
+      const arr = this.layout
+      const [x, y] = [12, 40]
+      let res = new Array(y).fill().map(() => new Array(x).fill(0))
+      let result = JSON.parse(JSON.stringify(arr[1]))
+      result.name = this.addForm.tagname
+      result.url = this.addForm.tagurl
+      result.w = 1
+      result.h = 4
+      result.i = arr.length
+      result.bgc = `rgba(${Math.floor(Math.random() * 200)},${Math.floor(Math.random() * 200)},${Math.floor(Math.random() * 200)},${Math.round(Math.random() * 0.7) + 0.3})`
+      arr.forEach(item => {
+        for (let i = 0; i < item.h; i++) {
+          for (let j = 0; j < item.w; j++) {
+            res[item.y + i][item.x + j] = 1
+          }
+        }
+      })
+      let end = false
+      for (let i = 0; i < y; i++) {
+        if(end) break;
+        for (let j = 0; j < x; j++) {
+          if (res[i][j] == 0) {
+            if (!res[i + 1][j] && !res[i + 2][j] && !res[i + 3][j]) {
+              [result.x, result.y] = [j, i]
+              end = true
+              break
+            }
+          }
+        }
+      }
+      this.layout.push(result)
+      this.setData()
+    },
+    deleteTag() {
+      console.log("星期一弄完")
+    },
+    addTagClosed() {
+      this.$refs.addFormRef.resetFields()
     }
   },
   components: {

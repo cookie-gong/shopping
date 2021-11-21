@@ -28,7 +28,7 @@ export default class SocketService {
     if (!window.WebSocket) {
       return console.log('您的服务器不支持WebSocket')
     }
-    this.ws = new WebSocket('ws://127.0.0.1:5555')
+    this.ws = new WebSocket('ws://119.23.53.122:5555')
     // 连接成功的事件
     this.ws.onopen = () => {
       console.log('连接服务器成功')

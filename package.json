@@ -31,6 +31,7 @@
     "babel-plugin-transform-remove-console": "^6.9.4",
     "screenfull": "^5.1.0",
     "vue-cli-plugin-element": "^1.0.1",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "webpack-bundle-analyzer": "^4.5.0"
   }
 }
