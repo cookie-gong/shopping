@@ -1,8 +1,8 @@
 <template>
   <div id="welcome">
     <el-row>
-      <el-button type="primary" round @click="addTags = true">添加标签</el-button>
-       <el-button type="danger" round @click="deleteTag">删除标签</el-button>
+      <el-button type="primary" round @click="addTag = true">添加标签</el-button>
+       <el-button type="danger" round @click="deleteTag = true">删除标签</el-button>
     </el-row>
     <template>
       <div class="box">
@@ -38,7 +38,7 @@
         </div>
       </div>
     </template>
-    <el-dialog title="添加用户" :visible.sync="addTags" width="50%" @close="addTagClosed">
+    <el-dialog title="添加标签" :visible.sync="addTag" width="50%" @close="addTagClosed">
       <el-form ref="addFormRef" :model="addForm" label-width="90px" :rules="addFormRules">
         <el-form-item label="标签名称" prop="tagname">
           <el-input v-model="addForm.tagname"></el-input>
@@ -48,8 +48,19 @@
         </el-form-item>
       </el-form>
       <span slot="footer">
-        <el-button @click="addTags = false">取 消</el-button>
+        <el-button @click="addTag = false">取 消</el-button>
         <el-button type="primary" @click="addUser">确 定</el-button>
+      </span>
+    </el-dialog>
+    <el-dialog title="删除标签" :visible.sync="deleteTag" width="50%" @close="deleteTagClosed">
+      <el-form ref="deleteFormRef" :model="deleteForm" label-width="90px" :rules="deleteFormRules">
+        <el-form-item label="标签名称" prop="tagname">
+          <el-input v-model="deleteForm.tagname"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer">
+        <el-button @click="deleteTag = false">取 消</el-button>
+        <el-button type="primary" @click="deleteUser">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -79,10 +90,14 @@ export default {
     return {
       layout: null,
       isShow: false,
-      addTags: false,
+      addTag: false,
+      deleteTag: false,
       addForm: {
         tagname: '',
         tagurl: ''
+      },
+      deleteForm: {
+        tagname: '',
       },
       addFormRules: {
         tagname: [
@@ -98,6 +113,17 @@ export default {
           { required: true, message: '请输入URL地址', trigger: 'blur' },
           { validator: checkUrl, trigger: 'blur' }
         ]
+      },
+      deleteFormRules: {
+        tagname: [
+          { required: true, message: '请输入标签名称', trigger: 'blur' },
+          {
+            min: 1,
+            max: 20,
+            message: '长度在 1 到 20 个字符',
+            trigger: 'blur'
+          }
+        ],
       }
     }
   },
@@ -158,6 +184,10 @@ export default {
       }, 500)
     },
     addUser() {
+       if (!this.addForm.tagname || !this.addForm.tagurl) {
+        return this.$message.error('添加标签失败')
+      }
+      this.$message.success('添加标签成功')
       const arr = this.layout
       const [x, y] = [12, 40]
       let res = new Array(y).fill().map(() => new Array(x).fill(0))
@@ -189,13 +219,27 @@ export default {
         }
       }
       this.layout.push(result)
-      this.setData()
+      this.addTag = false
     },
-    deleteTag() {
-      console.log("星期一弄完")
+    deleteUser() {
+       if (!this.deleteForm.tagname) {
+        return this.$message.error('删除标签失败')
+      }
+      this.$message.success('删除标签成功')
+      const len = this.layout.length
+      for(let i = 0; i< len ; i++){
+        if(this.layout[i].name == this.deleteForm.tagname){
+          this.layout.splice(i, 1)
+          break;
+        }
+      }
+      this.deleteTag = false
     },
     addTagClosed() {
       this.$refs.addFormRef.resetFields()
+    },
+    deleteTagClosed() {
+      this.$refs.deleteFormRef.resetFields()
     }
   },
   components: {
