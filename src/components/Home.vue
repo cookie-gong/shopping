@@ -207,5 +207,6 @@ export default {
 }
 .menu-bottom {
   z-index: 100;
+  cursor: pointer;
 }
 </style>

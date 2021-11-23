@@ -338,5 +338,10 @@ export default {
   top: 20px;
   cursor: pointer;
   font-size: 30px;
+  :hover{
+    -webkit-transform:rotate(720deg);
+    transform:rotate(720deg); -webkit-transition:-webkit-transform 1s linear;
+    transition:transform 1s linear;
+}
 }
 </style>

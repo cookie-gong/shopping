@@ -251,7 +251,7 @@ export default {
   }
 }
 </script>
-<style lang="css" scoped>
+<style lang="less" scoped>
 .iconfont {
   font-size: 48px;
   border-radius: 5px;
