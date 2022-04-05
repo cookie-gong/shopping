@@ -2,7 +2,7 @@
   <el-container>
     <el-header>
       <div class="logo">
-        <img src="../assets/demo.gif" alt="gif图片" @contextmenu.prevent />
+        <img src="../assets/demo.gif" alt="gif图片" @contextmenu.prevent @click="toWelcomeFun" />
         <span>电商后台管理系统</span>
       </div>
     </el-header>
@@ -56,6 +56,7 @@ import Vue from 'vue'
 import screenfull from 'screenfull'
 import quickMenu from 'vue-quick-menu'
 import 'font-awesome/css/font-awesome.min.css'
+import router from '../router/index'
 export default {
   data() {
     return {
@@ -86,9 +87,21 @@ export default {
     this.activePath = window.sessionStorage.getItem('activePath')
   },
   mounted() {
-    this.openVn()
+    router.beforeEach((to, from, next) => {
+      console.log(from.path)
+      if (from.path === '/login') {
+        console.log('===')
+        this.openVn()
+      }
+      next()
+    })
   },
   methods: {
+    toWelcomeFun() {
+      if (this.$route.path !== '/welcome') {
+        this.$router.push('welcome')
+      }
+    },
     print(key) {
       if (key === 0) {
         window.open('https://github.com/cookie-gong', '_blank')
@@ -126,7 +139,7 @@ export default {
     openVn() {
       const h = this.$createElement
       this.$message({
-        message: h('p', null, [h('span', null, '欢迎您：'), h('i', { style: 'color: teal' }, window.sessionStorage.getItem('rootName'))]),
+        message: h('p', null, [h('span', null, '登录成功：'), h('i', { style: 'color: teal' }, window.sessionStorage.getItem('rootName'))]),
         center: true,
         type: 'success',
         duration: 2000
@@ -181,6 +194,7 @@ export default {
 }
 .el-main {
   background-color: #eaedf1;
+  min-width: 1000px;
 }
 .iconfont {
   margin-right: 10px;

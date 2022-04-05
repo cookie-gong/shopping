@@ -2,7 +2,7 @@
   <div id="welcome">
     <el-row>
       <el-button type="primary" round @click="addTag = true">添加标签</el-button>
-       <el-button type="danger" round @click="deleteTag = true">删除标签</el-button>
+      <el-button type="danger" round @click="deleteTag = true">删除标签</el-button>
     </el-row>
     <template>
       <div class="box">
@@ -80,7 +80,7 @@ const delay = (function() {
 
 export default {
   data() {
-    var checkUrl = (rules, value, callback) => {
+    this.checkUrl = (rules, value, callback) => {
       const regUrl = /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/
       if (regUrl.test(value)) {
         return callback()
@@ -97,7 +97,7 @@ export default {
         tagurl: ''
       },
       deleteForm: {
-        tagname: '',
+        tagname: ''
       },
       addFormRules: {
         tagname: [
@@ -111,7 +111,7 @@ export default {
         ],
         tagurl: [
           { required: true, message: '请输入URL地址', trigger: 'blur' },
-          { validator: checkUrl, trigger: 'blur' }
+          { validator: this.checkUrl, trigger: 'blur' }
         ]
       },
       deleteFormRules: {
@@ -123,7 +123,7 @@ export default {
             message: '长度在 1 到 20 个字符',
             trigger: 'blur'
           }
-        ],
+        ]
       }
     }
   },
@@ -184,7 +184,7 @@ export default {
       }, 500)
     },
     addUser() {
-       if (!this.addForm.tagname || !this.addForm.tagurl) {
+      if (!this.addForm.tagname || !this.addForm.tagurl) {
         return this.$message.error('添加标签失败')
       }
       this.$message.success('添加标签成功')
@@ -207,11 +207,11 @@ export default {
       })
       let end = false
       for (let i = 0; i < y; i++) {
-        if(end) break;
+        if (end) break
         for (let j = 0; j < x; j++) {
           if (res[i][j] == 0) {
             if (!res[i + 1][j] && !res[i + 2][j] && !res[i + 3][j]) {
-              [result.x, result.y] = [j, i]
+              ;[result.x, result.y] = [j, i]
               end = true
               break
             }
@@ -222,15 +222,15 @@ export default {
       this.addTag = false
     },
     deleteUser() {
-       if (!this.deleteForm.tagname) {
+      if (!this.deleteForm.tagname) {
         return this.$message.error('删除标签失败')
       }
       this.$message.success('删除标签成功')
       const len = this.layout.length
-      for(let i = 0; i< len ; i++){
-        if(this.layout[i].name == this.deleteForm.tagname){
+      for (let i = 0; i < len; i++) {
+        if (this.layout[i].name == this.deleteForm.tagname) {
           this.layout.splice(i, 1)
-          break;
+          break
         }
       }
       this.deleteTag = false

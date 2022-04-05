@@ -25,8 +25,6 @@
   </div>
 </template>
 <script>
-const three = () => import('./three/three.vue')
-
 export default {
   data() {
     return {
@@ -67,7 +65,7 @@ export default {
         if (res.meta.status !== 200) {
           return this.$message.error('登录失败')
         }
-        this.$message.success('登录成功')
+        // this.$message.success('登录成功')
         window.sessionStorage.setItem('token', res.data.token)
         window.sessionStorage.setItem('rootName', this.form.username)
         this.$router.push('/home')
@@ -75,7 +73,7 @@ export default {
     }
   },
   components: {
-    three
+    three: () => import('./three/three.vue')
   }
 }
 </script>
