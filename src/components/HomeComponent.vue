@@ -52,7 +52,6 @@
   </el-container>
 </template>
 <script>
-import Vue from 'vue'
 import screenfull from 'screenfull'
 import quickMenu from 'vue-quick-menu'
 import 'font-awesome/css/font-awesome.min.css'
@@ -67,7 +66,7 @@ export default {
         103: 'iconfont icon-tijikongjian',
         101: 'iconfont icon-shangpin',
         102: 'iconfont icon-danju',
-        145: 'iconfont icon-baobiao'
+        145: 'iconfont icon-baobiao',
       },
       // 菜单栏是否开启水平折叠
       isCollapse: false,
@@ -79,7 +78,7 @@ export default {
       backgroundColor: '#42A5F5',
       color: '#eee',
       position: 'bottom-right',
-      isOpenNewTab: false
+      isOpenNewTab: false,
     }
   },
   created() {
@@ -130,7 +129,7 @@ export default {
       if (!screenfull.isEnabled) {
         this.$message({
           message: 'you browser can not work',
-          type: 'warning'
+          type: 'warning',
         })
         return false
       }
@@ -142,13 +141,13 @@ export default {
         message: h('p', null, [h('span', null, '登录成功：'), h('i', { style: 'color: teal' }, window.sessionStorage.getItem('rootName'))]),
         center: true,
         type: 'success',
-        duration: 2000
+        duration: 2000,
       })
-    }
+    },
   },
   components: {
-    quickMenu
-  }
+    quickMenu,
+  },
 }
 </script>
 <style lang="less" scoped>

@@ -17,66 +17,61 @@ import Params from '../components/goods/Params.vue'
 import Order from '../components/order/Order.vue'
 import ScreenPage from '../components/report/ScreenPage.vue' */
 
-
-
-
-
 // 懒加载: 登录——主页——欢迎页
-const Login = () => import(/* webpackChunkName: "login_Home_Welcome" */ "../components/Login.vue")
-const Home = () => import(/* webpackChunkName: "login_Home_Welcome" */ "../components/Home.vue")
-const Welcome = () => import(/* webpackChunkName: "login_Home_Welcome" */ "../components/Welcome.vue")
+const LoginComponent = () => import(/* webpackChunkName: "login_Home_Welcome" */ '../components/LoginComponent.vue')
+const HomeComponent = () => import(/* webpackChunkName: "login_Home_Welcome" */ '../components/HomeComponent.vue')
+const WelcomeComponent = () => import(/* webpackChunkName: "login_Home_Welcome" */ '../components/WelcomeComponent.vue')
 
 // 用户管理
-const Users = () => import(/* webpackChunkName: "users" */ "../components/users/Users.vue")
+const UsersComponent = () => import(/* webpackChunkName: "users" */ '../components/users/UsersComponent.vue')
 
 // 权限管理
-const Rights = () => import(/* webpackChunkName: "rights" */ "../components/power/Rights.vue")
-const Roles = () => import(/* webpackChunkName: "rights" */ "../components/power/Roles.vue")
+const RightsComponent = () => import(/* webpackChunkName: "rights" */ '../components/power/RightsComponent.vue')
+const RolesComponent = () => import(/* webpackChunkName: "rights" */ '../components/power/RolesComponent.vue')
 
 // 商品管理
-const Categories = () => import(/* webpackChunkName: "goods" */ "../components/goods/Categories.vue")
-const Params = () => import(/* webpackChunkName: "goods" */ "../components/goods/Params.vue")
-const Add = () => import(/* webpackChunkName: "goods" */ "../components/goods/Add.vue")
-const Goods = () => import(/* webpackChunkName: "goods" */ "../components/goods/Goods.vue")
+const Categories = () => import(/* webpackChunkName: "goods" */ '../components/goods/CategoriesComponent.vue')
+const ParamsComponent = () => import(/* webpackChunkName: "goods" */ '../components/goods/ParamsComponent.vue')
+const AddComponent = () => import(/* webpackChunkName: "goods" */ '../components/goods/AddComponent.vue')
+const GoodsComponent = () => import(/* webpackChunkName: "goods" */ '../components/goods/GoodsComponent.vue')
 
 // 订单管理
-const Order = () => import(/* webpackChunkName: "order_Report" */ "../components/order/Order.vue")
+const OrderComponent = () => import(/* webpackChunkName: "order_Report" */ '../components/order/OrderComponent.vue')
 
 // 数据可视化
-const ScreenPage = () => import(/* webpackChunkName: "order_Report" */ "../components/report/ScreenPage.vue")
+const ScreenPage = () => import(/* webpackChunkName: "order_Report" */ '../components/report/ScreenPage.vue')
 
 Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes: [
     { path: '/', redirect: '/login' },
-    { path: '/login', component: Login },
+    { path: '/login', component: LoginComponent },
     {
       path: '/home',
-      component: Home,
+      component: HomeComponent,
       redirect: '/welcome',
       children: [
-        { path: '/welcome', component: Welcome },
-        { path: '/users', component: Users },
-        { path: '/rights', component: Rights },
-        { path: '/roles', component: Roles },
+        { path: '/welcome', component: WelcomeComponent },
+        { path: '/users', component: UsersComponent },
+        { path: '/rights', component: RightsComponent },
+        { path: '/roles', component: RolesComponent },
         { path: '/categories', component: Categories },
-        { path: '/goods', component: Goods },
-        { path: '/goods/add', component: Add },
-        { path: '/params', component: Params },
-        { path: '/orders', component: Order },
-
-      ]
+        { path: '/goods', component: GoodsComponent },
+        { path: '/goods/add', component: AddComponent },
+        { path: '/params', component: ParamsComponent },
+        { path: '/orders', component: OrderComponent },
+      ],
     },
     { path: '/reports', component: ScreenPage },
-  ]
+  ],
 })
 /* 路由守卫 */
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login') return next();
-  const tokenStr = window.sessionStorage.getItem('token');
-  if (!tokenStr) return next('/login');
-  next();
+  if (to.path === '/login') return next()
+  const tokenStr = window.sessionStorage.getItem('token')
+  if (!tokenStr) return next('/login')
+  next()
 })
 
 export default router

@@ -7,7 +7,7 @@ import { OrbitControls } from './OrbitControls.js'
 import { Water } from './Water.js'
 import { Sky } from './Sky.js'
 export default {
-  name: 'three',
+  name: 'threeComponent',
   data() {
     return {
       scene: null,
@@ -18,7 +18,6 @@ export default {
       sky: null,
       water: null,
       sun: null,
-      controls: null,
       parameters: null,
       pmremGenerator: null,
     }
@@ -131,7 +130,7 @@ export default {
     },
 
     render() {
-      const time = performance.now() * 0.001
+      // const time = performance.now() * 0.001
 
       // this.mesh.position.y = Math.sin(time) * 20 + 5
       // this.mesh.rotation.x = time * 0.5

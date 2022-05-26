@@ -16,7 +16,7 @@
 import { mapState } from 'vuex'
 import { getThemeValue } from '../../utils/theme_utils'
 export default {
-  name: 'Trend',
+  name: 'TrendComponent',
   data() {
     return {
       chartInstance: null,

@@ -94,14 +94,14 @@ export default {
       roleId: '',
       treeProps: {
         label: 'authName',
-        children: 'children'
+        children: 'children',
       },
       // 此用户所拥有的权限数组
       defKeys: [],
       // 添加角色的名称和描述初始化对象
       addRoleList: {
         roleName: '',
-        roleDesc: ''
+        roleDesc: '',
       },
       addRoleRules: {
         roleName: [
@@ -110,8 +110,8 @@ export default {
             min: 3,
             max: 10,
             message: '长度在 3 到 10 个字符',
-            trigger: 'blur'
-          }
+            trigger: 'blur',
+          },
         ],
         roleDesc: [
           { required: true, message: '请输入角色描述', trigger: 'blur' },
@@ -119,9 +119,9 @@ export default {
             min: 3,
             max: 16,
             message: '长度在 3 到 16 个字符',
-            trigger: 'blur'
-          }
-        ]
+            trigger: 'blur',
+          },
+        ],
       },
       editRoleInfo: {},
       editRoleRules: {
@@ -131,8 +131,8 @@ export default {
             min: 2,
             max: 10,
             message: '长度在 2 到 10 个字符',
-            trigger: 'blur'
-          }
+            trigger: 'blur',
+          },
         ],
         roleDesc: [
           { required: true, message: '请输入角色描述', trigger: 'blur' },
@@ -140,10 +140,10 @@ export default {
             min: 3,
             max: 16,
             message: '长度在 3 到 16 个字符',
-            trigger: 'blur'
-          }
-        ]
-      }
+            trigger: 'blur',
+          },
+        ],
+      },
     }
   },
   created() {
@@ -194,7 +194,7 @@ export default {
       this.$confirm('此操作将永久删除该权限, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-        type: 'warning'
+        type: 'warning',
       })
         .then(async () => {
           const { data: res } = await this.$http.delete(`roles/${role.id}/rights/${rightId}`)
@@ -206,7 +206,7 @@ export default {
         .catch(() => {
           this.$message({
             type: 'info',
-            message: '已取消删除'
+            message: '已取消删除',
           })
         })
     },
@@ -216,7 +216,7 @@ export default {
     async submitAddRole() {
       const { data: res } = await this.$http.post('roles', {
         roleName: this.addRoleList.roleName,
-        roleDesc: this.addRoleList.roleDesc
+        roleDesc: this.addRoleList.roleDesc,
       })
       if (res.meta.status !== 201) {
         return this.$message.error('添加角色失败')
@@ -237,7 +237,7 @@ export default {
       this.$confirm('此操作将永久删除该角色, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-        type: 'warning'
+        type: 'warning',
       })
         .then(async () => {
           const { data: res } = await this.$http.delete(`roles/${id}`)
@@ -254,7 +254,7 @@ export default {
     async setEditRole() {
       const { data: res } = await this.$http.put(`roles/${this.editRoleInfo.id}`, {
         roleName: this.editRoleInfo.roleName,
-        roleDesc: this.editRoleInfo.roleDesc
+        roleDesc: this.editRoleInfo.roleDesc,
       })
       if (res.meta.status !== 200) {
         return this.$message.error('修改角色信息失败')
@@ -262,8 +262,8 @@ export default {
       this.$message.success('修改角色信息成功')
       this.getRolesList()
       this.editPowerDialogVisible = false
-    }
-  }
+    },
+  },
 }
 </script>
 <style lang="css" scoped>

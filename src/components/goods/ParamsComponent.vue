@@ -189,7 +189,7 @@ export default {
     // 显示添加参数输入框
     showInput(row) {
       row.inputVisible = true
-      this.$nextTick(_ => {
+      this.$nextTick(() => {
         this.$refs.saveTagInput.$refs.input.focus()
       })
     },

@@ -5,14 +5,14 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    theme:'chalk',
-    scale: 16 / 9
+    theme: 'chalk',
+    scale: 16 / 9,
   },
   mutations: {
-    changeTheme(state){
-      if(state.theme === 'chalk'){
+    changeTheme(state) {
+      if (state.theme === 'chalk') {
         state.theme = 'vintage'
-      }else{
+      } else {
         state.theme = 'chalk'
       }
     },
@@ -20,8 +20,7 @@ export default new Vuex.Store({
   actions: {
     changeScale(state, _scale) {
       state.scale = _scale
-    }
+    },
   },
-  modules: {
-  }
+  modules: {},
 })

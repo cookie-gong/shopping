@@ -30,7 +30,7 @@ export default {
     return {
       form: {
         username: 'admin',
-        password: '123456'
+        password: '123456',
       },
       rules: {
         username: [
@@ -39,8 +39,8 @@ export default {
             min: 3,
             max: 10,
             message: '长度在 3 到 10 个字符',
-            trigger: 'blur'
-          }
+            trigger: 'blur',
+          },
         ],
         password: [
           { required: true, message: '请输入用户密码', trigger: 'blur' },
@@ -48,10 +48,10 @@ export default {
             min: 6,
             max: 16,
             message: '长度在 6 到 16 个字符',
-            trigger: 'blur'
-          }
-        ]
-      }
+            trigger: 'blur',
+          },
+        ],
+      },
     }
   },
   methods: {
@@ -70,11 +70,11 @@ export default {
         window.sessionStorage.setItem('rootName', this.form.username)
         this.$router.push('/home')
       })
-    }
+    },
   },
   components: {
-    three: () => import('./three/three.vue')
-  }
+    three: () => import('./three/threeComponent.vue'),
+  },
 }
 </script>
 <style lang="less" scoped>

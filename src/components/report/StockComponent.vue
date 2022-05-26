@@ -7,7 +7,7 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'Stock',
+  name: 'StockComponent',
   data() {
     return {
       chartInstance: null,
@@ -218,5 +218,4 @@ export default {
   },
 }
 </script>
-<style lang="css" scoped>
-</style>
+<style lang="css" scoped></style>

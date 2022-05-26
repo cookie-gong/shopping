@@ -9,7 +9,7 @@ import { getProvinceMapInfo } from '@/utils/map_utils'
 import { mapState } from 'vuex'
 
 export default {
-  name: 'Map',
+  name: 'MapComponent',
   data() {
     return {
       // axios实例对象
@@ -24,7 +24,7 @@ export default {
       mapData: {},
       // 判断是否进入省份
       isProvince: false,
-      url:''
+      url: '',
     }
   },
   computed: {
@@ -43,7 +43,7 @@ export default {
     },
   },
   created() {
-    this.url = location.protocol + "//" + location.host
+    this.url = location.protocol + '//' + location.host
     console.log(this.url)
     this.axiosInstance = axios.create({
       baseURL: this.url,
@@ -200,5 +200,4 @@ export default {
   },
 }
 </script>
-<style lang="css" scoped>
-</style>
+<style lang="css" scoped></style>

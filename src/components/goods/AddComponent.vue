@@ -61,7 +61,14 @@
           </el-tab-pane>
           <el-tab-pane label="商品图片" name="3">
             <!-- action: 表示图片要上传的后台api地址 -->
-            <el-upload action="http://119.23.53.122:8889/api/private/v1/upload" :on-preview="handlePreview" :on-remove="handleRemove" list-type="picture" :headers="headerObj" :on-success="handleSuccess">
+            <el-upload
+              action="http://119.23.53.122:8889/api/private/v1/upload"
+              :on-preview="handlePreview"
+              :on-remove="handleRemove"
+              list-type="picture"
+              :headers="headerObj"
+              :on-success="handleSuccess"
+            >
               <el-button size="small" type="primary">点击上传</el-button>
             </el-upload>
           </el-tab-pane>

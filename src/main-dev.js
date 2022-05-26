@@ -2,17 +2,15 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import './plugins/element.js'
-import axios from "axios";
+import axios from 'axios'
 import store from './store'
 
 import './assets/fonts/iconfont.css'
 
-import './assets/css/global.css';
+import './assets/css/global.css'
 
-import './assets/static/theme/chalk';
-import './assets/static/theme/vintage';
-
-
+import './assets/static/theme/chalk'
+import './assets/static/theme/vintage'
 
 import TreeTable from 'vue-table-with-tree-grid'
 
@@ -25,12 +23,11 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 
-
 import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 //配置请求的根路径
-axios.defaults.baseURL = "http://shopping.gongweiwei.top:8889/api/private/v1/";
+axios.defaults.baseURL = 'http://43.142.30.158:8889/api/private/v1/'
 // 在 request 拦截器中，展示进度条   Nprogress.start()
 axios.interceptors.request.use(config => {
   Nprogress.start()
@@ -44,11 +41,7 @@ axios.interceptors.response.use(config => {
   return config
 })
 
-
-Vue.prototype.$http = axios;
-
-
-
+Vue.prototype.$http = axios
 
 import SocketService from './utils/socket_service'
 // 对服务端进行websocket 的连接
@@ -58,7 +51,6 @@ SocketService.Instance.connect()
 Vue.prototype.$socket = SocketService.Instance
 
 Vue.prototype.$echarts = echarts
-
 
 Vue.component('tree-table', TreeTable)
 
@@ -81,5 +73,5 @@ Vue.filter('dateFormat', function (originVal) {
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
 }).$mount('#app')

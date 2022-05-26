@@ -109,6 +109,7 @@
 export default {
   data() {
     var checkEmail = (rules, value, callback) => {
+      // eslint-disable-next-line no-useless-escape
       const regEmail = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/
       if (regEmail.test(value)) {
         return callback()
@@ -220,7 +221,7 @@ export default {
       this.$refs.addFormRef.resetFields()
     },
     addUser() {
-      this.$refs.addFormRef.validate(async (valid) => {
+      this.$refs.addFormRef.validate(async valid => {
         if (!valid) return
         const { data: res } = await this.$http.post('users', this.addForm)
         if (res.meta.status !== 201) {
@@ -266,7 +267,7 @@ export default {
       this.$refs.editFormRef.resetFields()
     },
     editUserInformation() {
-      this.$refs.editFormRef.validate(async (valid) => {
+      this.$refs.editFormRef.validate(async valid => {
         if (!valid) return
         const { data: res } = await this.$http.put(`users/${this.editForm.id}`, { email: this.editForm.email, mobile: this.editForm.mobile })
         if (res.meta.status !== 200) {

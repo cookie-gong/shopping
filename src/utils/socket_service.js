@@ -9,7 +9,6 @@ export default class SocketService {
   }
   // 和服务端连接的socket对象
   ws = null
-
   // 存储回调函数
   callBackMapping = {}
 
@@ -21,7 +20,6 @@ export default class SocketService {
   // 重新连接尝试的次数
   connectRetryCount = 0
 
-  
   // 定义连接服务器的方法
   connect() {
     // 连接服务器
@@ -52,7 +50,6 @@ export default class SocketService {
       const socketType = recvData.socketType
       // 判断回调函数是否存在
       if (this.callBackMapping[socketType]) {
-
         const action = recvData.action
         if (action === 'getData') {
           const realData = JSON.parse(recvData.data)

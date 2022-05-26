@@ -10,7 +10,7 @@
 import { mapState } from 'vuex'
 import { getThemeValue } from '@/utils/theme_utils'
 export default {
-  name: 'Hot',
+  name: 'HotComponent',
   data() {
     return {
       chartInstance: null,

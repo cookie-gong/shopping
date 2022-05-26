@@ -7,7 +7,7 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'Rank',
+  name: 'RankComponent',
   data() {
     return {
       chartInstance: null,
@@ -192,5 +192,4 @@ export default {
   },
 }
 </script>
-<style lang="css" scoped>
-</style>
+<style lang="css" scoped></style>

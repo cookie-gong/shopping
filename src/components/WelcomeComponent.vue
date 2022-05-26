@@ -70,9 +70,9 @@ import * as echarts from 'echarts'
 import Vue from 'vue'
 Vue.prototype.$echarts = echarts
 import VueGridLayout from 'vue-grid-layout'
-const delay = (function() {
+const delay = (function () {
   let timer = 0
-  return function(callback, ms) {
+  return function (callback, ms) {
     clearTimeout(timer)
     timer = setTimeout(callback, ms)
   }
@@ -81,6 +81,7 @@ const delay = (function() {
 export default {
   data() {
     this.checkUrl = (rules, value, callback) => {
+      // eslint-disable-next-line no-useless-escape
       const regUrl = /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/
       if (regUrl.test(value)) {
         return callback()
@@ -94,10 +95,10 @@ export default {
       deleteTag: false,
       addForm: {
         tagname: '',
-        tagurl: ''
+        tagurl: '',
       },
       deleteForm: {
-        tagname: ''
+        tagname: '',
       },
       addFormRules: {
         tagname: [
@@ -106,13 +107,13 @@ export default {
             min: 1,
             max: 20,
             message: '长度在 1 到 20 个字符',
-            trigger: 'blur'
-          }
+            trigger: 'blur',
+          },
         ],
         tagurl: [
           { required: true, message: '请输入URL地址', trigger: 'blur' },
-          { validator: this.checkUrl, trigger: 'blur' }
-        ]
+          { validator: this.checkUrl, trigger: 'blur' },
+        ],
       },
       deleteFormRules: {
         tagname: [
@@ -121,10 +122,10 @@ export default {
             min: 1,
             max: 20,
             message: '长度在 1 到 20 个字符',
-            trigger: 'blur'
-          }
-        ]
-      }
+            trigger: 'blur',
+          },
+        ],
+      },
     }
   },
   created() {
@@ -135,17 +136,17 @@ export default {
       action: 'getData',
       socketType: 'gridData',
       chartName: 'grid',
-      value: ''
+      value: '',
     })
   },
   watch: {
     layout: {
-      handler(val) {
+      handler() {
         this.fn()
       },
       // 这里是关键，代表递归监听 demo 的变化
-      deep: true
-    }
+      deep: true,
+    },
   },
   methods: {
     echartFun() {
@@ -174,7 +175,7 @@ export default {
         action: 'setData',
         socketType: 'gridData',
         chartName: 'grid',
-        value: this.layout
+        value: this.layout,
       })
     },
     // 使用防抖函数
@@ -240,15 +241,15 @@ export default {
     },
     deleteTagClosed() {
       this.$refs.deleteFormRef.resetFields()
-    }
+    },
   },
   components: {
     GridLayout: VueGridLayout.GridLayout,
-    GridItem: VueGridLayout.GridItem
+    GridItem: VueGridLayout.GridItem,
   },
   beforeDestroy() {
     this.setData()
-  }
+  },
 }
 </script>
 <style lang="less" scoped>

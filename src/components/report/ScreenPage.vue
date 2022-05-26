@@ -71,12 +71,12 @@
 </template>
 
 <script>
-import Hot from './Hot.vue'
-import Map from './Map.vue'
-import Rank from './Rank.vue'
-import Seller from './Seller.vue'
-import Stock from './Stock.vue'
-import Trend from './Trend.vue'
+import Hot from './HotComponent.vue'
+import Map from './MapComponent.vue'
+import Rank from './RankComponent.vue'
+import Seller from './SellerComponent.vue'
+import Stock from './StockComponent.vue'
+import Trend from './TrendComponent.vue'
 import { mapState } from 'vuex'
 import { getThemeValue } from '@/utils/theme_utils'
 import screenfull from 'screenfull'
@@ -91,10 +91,10 @@ export default {
         stock: false,
         map: false,
         rank: false,
-        hot: false
+        hot: false,
       },
       timeNow: '',
-      timer: null
+      timer: null,
     }
   },
   created() {
@@ -124,7 +124,7 @@ export default {
         action: 'fullScreen',
         socketType: 'fullScreen',
         chartName: chartName,
-        value: tragetValue
+        value: tragetValue,
       })
     },
     // 接收到全屏数据之后的处理
@@ -145,7 +145,7 @@ export default {
         action: 'themeChange',
         socketType: 'themeChange',
         chartName: '',
-        value: ''
+        value: '',
       })
     },
     // 接收服务器传入的主题数据，实现主题切换
@@ -166,7 +166,7 @@ export default {
       if (!screenfull.isEnabled) {
         this.$message({
           message: 'you browser can not work',
-          type: 'warning'
+          type: 'warning',
         })
         return false
       }
@@ -175,7 +175,7 @@ export default {
     backPage() {
       this.$router.go(-1)
       window.sessionStorage.setItem('activePath', '')
-    }
+    },
   },
   components: {
     Hot,
@@ -183,7 +183,7 @@ export default {
     Rank,
     Seller,
     Stock,
-    Trend
+    Trend,
   },
   computed: {
     ...mapState(['theme']),
@@ -196,10 +196,10 @@ export default {
     containerStyle() {
       return {
         backgroundColor: getThemeValue(this.theme).backgroundColor,
-        color: getThemeValue(this.theme).titleColor
+        color: getThemeValue(this.theme).titleColor,
       }
-    }
-  }
+    },
+  },
 }
 </script>
 <style lang="less" scoped>
@@ -338,10 +338,11 @@ export default {
   top: 20px;
   cursor: pointer;
   font-size: 30px;
-  :hover{
-    -webkit-transform:rotate(720deg);
-    transform:rotate(720deg); -webkit-transition:-webkit-transform 1s linear;
-    transition:transform 1s linear;
-}
+  :hover {
+    -webkit-transform: rotate(720deg);
+    transform: rotate(720deg);
+    -webkit-transition: -webkit-transform 1s linear;
+    transition: transform 1s linear;
+  }
 }
 </style>
